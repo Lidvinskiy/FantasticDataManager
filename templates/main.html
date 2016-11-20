@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Fantastic DataWiz Manager</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/sandstone/bootstrap.min.css" rel="stylesheet" integrity="sha384-G3G7OsJCbOk1USkOY4RfeX1z27YaWrZ1YuaQ5tbuawed9IoreRDpWpTkZLXQfPm3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.css" media="screen" title="no title">
+    <style media="screen">
+      .material-design-block
+      {
+
+          background-color: white;
+          border: 1px solid #D8D8D8;
+          border-radius: 5px;
+          border-width: 1px 1px 3px 1px;
+          padding: 10px;
+      }
+
+      body{
+        background: #EEE;
+        overflow-x: hidden;
+      }
+
+      .container-fluid
+      {
+        margin: 0;
+        padding: 0;
+      }
+
+      .jumbotron
+      {
+        .padding-left:
+      }
+
+        .loadlabel
+        {
+            text-align: center;
+
+        }
+
+        .loadlabel img
+        {
+            height:20px;
+            margin: 0 auto;
+        }
+
+        .table-report
+        {
+            font-size:13px;
+
+        }
+    </style>
+  </head>
+  <body>
+    <!-- MODAL WINDOW -->
+    <div class="modal fade" id="ModalUser" tabindex="-1" role="dialog" aria-labelledby="ModalUser">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Інформація про {{ request.session.user_name }} </h4>
+          </div>
+          <div class="modal-body">
+            <p>
+              Ім`я: <b class="text-success"> {{ request.session.user_name }} </b>
+            </p>
+            <p>
+              Дата першого чеку: <b class="text-success"> {{ request.session.date_from }} </b>
+            </p>
+            <p>
+              Дата останнього чеку: <b class="text-success"> {{ request.session.date_to }} </b>
+            </p>
+            <p>
+              Магазини користувача:
+              {% for shop in request.session.shops%}
+                  <br />
+                  <b class="text-muted">&nbsp;&nbsp;&nbsp;{{ shop.0 }}</b>
+              {% endfor %}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Static navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+<div class="container">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#" >Fantastic DataWiz Manager</a>
+  </div>
+  <div id="navbar" class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+      <li class="active">
+        <a href="#">
+        <span class="glyphicon glyphicon-list-alt"></span>
+        Показники
+        </a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#" data-toggle="modal" data-target="#ModalUser"><span class="glyphicon glyphicon-user"></span>{{ request.session.user_name }}</a></li>
+    </ul>
+  </div><!--/.nav-collapse -->
+</div>
+</nav>
+
+<div class="container-fluid">
+  <div class="jumbotron">
+    <div class="container">
+      <br>
+      <br>
+      <br>
+      <h1>Панель користувача</h1>
+      <p>
+        Дізнавайтеся останню інформацію про продажам ваших магазинів.
+      </p>
+      <p>
+        <small class="text-muted">Для зміни магазину натискніть відповідний пункт зверху</small>
+      </p>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-xs-0 col-md-3">
+
+    </div>
+    <div class="col-xs-12 col-md-6">
+      <h4>Що ви хочете дізнатись?</h4>
+      <ul class="nav nav-pills choosebuttons">
+        <li class="list-inline-item"><a href="#" onclick="ShowMainIndicators();">Основні показники</a></li>
+        <li class="list-inline-item"><a href="#" onclick="ShowReports();">Звіти по товарам, що виросли/впали по продажам</a></li>
+      </ul>
+    </div>
+    <div class="col-xs-0 col-md-3">
+
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row hidden" id="datepicker">
+    <div class="col-xs-0 col-md-3">
+
+    </div>
+    <div class="col-xs-12 col-md-6">
+
+
+            <div class="form-horizontal">
+              <div class="form-group">
+                <div class="col-sm-2">
+
+                </div>
+                <div class="col-sm-10">
+                  <h3 class="text-success">Налаштування:</h3>
+                  <small id="infoquery" class="text-muted"></small>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="selectchoise" class="col-sm-2 control-label">Будемо порівнювати:</label>
+                <div class="col-sm-10">
+                  <select class="form-control" id="selectchoise" onchange="ChangeSelect();">
+                    <option value="1">2 дня</option>
+                    <option value="2">2 проміжка часу</option>
+                  </select>
+                </div>
+              </div>
+
+
+              <div class="form-group datetwo">
+                <label for="date1" class="col-sm-2 control-label">Дата #1</label>
+                <div class="col-sm-10 ">
+                  <input type="text" class="form-control" id="date1">
+                </div>
+              </div>
+
+              <div class="form-group datetwo">
+                <label for="date2" class="col-sm-2 control-label">Дата #2</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="date2">
+                </div>
+              </div>
+
+              <div class="form-group rangetwo hidden">
+                <label for="range1" class="col-sm-2 control-label">Проміжок #1</label>
+                <div class="col-sm-10">
+                  <div class="input-daterange input-group" id="">
+                      <input type="text" class="input-sm form-control" name="start" id="date_from_1" />
+                      <span class="input-group-addon">to</span>
+                      <input type="text" class="input-sm form-control" name="end" id="date_to_1" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group rangetwo hidden">
+                <label for="range2" class="col-sm-2 control-label">Проміжок #2</label>
+                <div class="col-sm-10">
+                  <div class="input-daterange input-group" id="">
+                      <input type="text" class="input-sm form-control" name="start" id="date_from_2" />
+                      <span class="input-group-addon">to</span>
+                      <input type="text" class="input-sm form-control" name="end" id="date_to_2" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="selectchoise" class="col-sm-2 control-label">Магазин:</label>
+                <div class="col-sm-10">
+                  <select class="form-control" id="selectshop">
+                    {% for shop in request.session.shops%}
+                        <option value="{{ shop.1 }}">{{ shop.0 }}</option>
+                    {% endfor %}
+                    <option value="{{ request.session.all_shops }}">Всі магазини</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button class="btn btn-success" onclick="AjaxSendInformation();">Отримати дані</button>
+                </div>
+              </div>
+            </div>
+    </div>
+    <div class="col-xs-0 col-md-3">
+
+    </div>
+  </div>
+
+    <div class="row hidden" id="loader">
+     <div class="col-xs-0 col-md-3">
+
+    </div>
+    <div class="col-xs-12 col-md-6 loadlabel">
+      <h5 class="text-muted">Зачекайте будь ласка, ваш запит оброблюється</h5>
+       <img src="http://gifok.net/images/2016/11/20/ajax-loader.gif" alt="">
+    </div>
+    <div class="col-xs-0 col-md-3">
+
+    </div>
+    </div>
+
+  <div class="row hidden" id="mainIndicators">
+    <div class="col-xs-0 col-md-3">
+
+    </div>
+    <div class="col-xs-12 col-md-6" id="tablebase">
+
+    </div>
+    <div class="col-xs-0 col-md-3">
+
+    </div>
+  </div>
+
+  <div class="row hidden" id="reportsGoods">
+    <div class="col-xs-12 col-md-6" id="tablereports_first">
+
+    </div>
+    <div class="col-xs-12 col-md-6" id="tablereports_second">
+
+    </div>
+  </div>
+
+
+</div>
+
+
+
+    <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="   crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+
+    <script type="text/javascript">
+      var Is2Days = true;
+      var IsMainIndicators;
+
+      $('#date1').datepicker({
+        startDate: '{{ request.session.date_from }}',
+        endDate: '{{ request.session.date_to }}'
+      });
+      $('#date2').datepicker({
+          startDate: '{{ request.session.date_from }}',
+          endDate: '{{ request.session.date_to }}'
+      });
+      $('.input-daterange').datepicker({
+          startDate: '{{ request.session.date_from }}',
+          endDate: '{{ request.session.date_to }}'
+      });
+
+      function ChangeSelect()
+      {
+        var choise = $("#selectchoise").val();
+
+        if (choise == 1)
+          Select2Days();
+        else {
+          Select2Ranges();
+        }
+      }
+
+      function Select2Days()
+      {
+        Is2Days = true;
+
+        $(".datetwo").each(function(){
+          $(this).removeClass("hidden");
+        });
+
+        $(".rangetwo").each(function(){
+          $(this).addClass("hidden");
+        });
+      }
+
+      function Select2Ranges()
+      {
+        Is2Days = false;
+
+        $(".rangetwo").each(function(){
+          $(this).removeClass("hidden");
+        });
+
+        $(".datetwo").each(function(){
+          $(this).addClass("hidden");
+        });
+      }
+
+      function ShowMainIndicators() {
+        ClearAllSelected();
+        $(".choosebuttons li:nth-child(1)").addClass("active");
+
+        $("#datepicker").removeClass("hidden");
+
+        IsMainIndicators = true;
+
+        $("#infoquery").html("основні показники");
+
+        $("#mainIndicators").removeClass("hidden");
+
+                       $("#tablereports_first").addClass("hidden");
+             $("#tablereports_second").addClass("hidden");
+
+          $("#tablebase").removeClass("hidden");
+      }
+
+      function AjaxSendInformation()
+      {
+        var date_from_1 = "";
+        var date_to_1 = "";
+        var date_from_2 = "";
+        var date_to_2 = "";
+        var shop = $("#selectshop").val();
+
+        if (Is2Days)
+        {
+          date_from_1 = $("#date1").val();
+          date_to_1 = date_from_1;
+          date_from_2 = $("#date2").val();
+          date_to_2 = date_from_2;
+        }
+        else
+        {
+          date_from_1 = $("#date_from_1").val();
+          date_to_1 = $("#date_to_1").val();
+          date_from_2 = $("#date_from_2").val();
+          date_to_2 = $("#date_to_2").val();
+        }
+
+
+         $("#loader").removeClass("hidden");
+
+         if (IsMainIndicators) {
+           $.get('get_data/',
+                   ({shops:shop,
+                       date_from_first:date_from_1,
+                       date_to_first:date_to_1,
+                       date_from_second:date_from_2,
+                       date_to_second:date_to_2}), function(data){
+             $("#loader").addClass("hidden");
+             $("#tablebase").html(data);
+             $("#tablebase").addClass("material-design-block");
+             });
+         }
+         else {
+           $.get('change_inform/',
+                   ({shops:shop,
+                       date_from_first:date_from_1,
+                       date_to_first:date_to_1,
+                       date_from_second:date_from_2,
+                       date_to_second:date_to_2}), function(data){
+             $("#loader").addClass("hidden");
+             $("#tablereports_first").html(data['first']);
+             $("#tablereports_second").html(data['second']);
+             $("#tablereports_first").addClass("material-design-block");
+             $("#tablereports_second").addClass("material-design-block");
+             },'json');
+         }
+
+
+
+      }
+
+      function ShowReports() {
+        ClearAllSelected();
+        $(".choosebuttons li:nth-child(2)").addClass("active");
+
+        IsMainIndicators = false;
+
+        $("#datepicker").removeClass("hidden");
+
+        $("#infoquery").html("звіти по товарах");
+
+        $("#reportsGoods").removeClass("hidden");
+
+          $("#tablebase").addClass("hidden");
+
+          $("#tablereports_first").removeClass("hidden");
+          $("#tablereports_second").removeClass("hidden");
+      }
+
+      function ClearAllSelected()
+      {
+        $(".choosebuttons li").each(function(){
+          $(this).removeClass("active");
+        });
+      }
+    </script>
+  </body>
+</html>
