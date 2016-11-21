@@ -1,0 +1,3 @@
+[submodule "lib/python_dwapi"]
+	path = lib/python_dwapi
+	url = https://github.com/datawizio/pythonAPI.git
