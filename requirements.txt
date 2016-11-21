@@ -6,7 +6,6 @@ numpy==1.11.2
 pandas==0.19.1
 pycrypto==2.6.1
 python-dateutil==2.6.0
-python-dwapi==0.1.dev0
 pytz==2016.7
 requests==2.12.1
 six==1.10.0
