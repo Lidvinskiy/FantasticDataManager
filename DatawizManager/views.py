@@ -16,8 +16,20 @@ def Loginpage(request):
     return render(request, 'Loginform.html', {'form': form_class})
 
 
+def logout(request):
+    for key in request.session.keys():
+        del request.session[key]
+    form_class = forms.LoginForm
+    return render(request, 'Loginform.html', {'form': form_class})
+
+
 def main_page(request):
-    return render(request, 'main.html')
+    try:
+        tr = request.session['key']
+        return render(request, 'main.html')
+    except KeyError:
+        form_class = forms.LoginForm
+        return render(request, 'Loginform.html', {'form': form_class})
 
 
 def login(request):

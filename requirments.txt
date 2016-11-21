@@ -1,0 +1,5 @@
+requests
+httpsig
+pandas
+nose
+https://github.com/datawizio/pythonAPI.git

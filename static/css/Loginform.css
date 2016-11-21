@@ -1,0 +1,14 @@
+      .material-design-block
+      {
+          margin-top: 15%;
+          background-color: white;
+          border: 1px solid #D8D8D8;
+          border-radius: 5px;
+          border-width: 1px 1px 3px 1px;
+          padding: 10px;
+      }
+
+      body{
+        background: #EEE;
+        overflow-x: hidden;
+      }

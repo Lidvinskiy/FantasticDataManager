@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from DatawizManager import views as vs
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 # from django.contrib import admin
 
@@ -23,6 +24,9 @@ urlpatterns = [
     # url(r'^admin/', admin.site.urls),
     url(r'^login/$', vs.login, name='login'),
     url(r'^main/$', vs.main_page, name='main'),
-    url(r'get_data/$' , vs.get_base_data_to_html, name='get_data'),
-    url(r'change_inform/$' , vs.change_inform, name='change_inform')
+    url(r'get_data/$', vs.get_base_data_to_html, name='get_data'),
+    url(r'change_inform/$', vs.change_inform, name='change_inform'),
+    url(r'^logout$', vs.logout, name='logout')
 ]
+urlpatterns += staticfiles_urlpatterns()
+
