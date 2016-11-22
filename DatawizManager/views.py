@@ -77,7 +77,6 @@ def change_inform(request, shops='', date_from_first='', date_to_first='', date_
     query = BAL.create_change_inform(request.session['login'], request.session['key'], shops_int, date_from_f,
                                      date_to_f,
                                      date_from_s, date_to_s)
-    print query[0]
     data = {}
     data['first'] = query[0].to_html(
         classes=['table', 'table-striped', 'table-hover', 'table-responsive', 'table-report'], border=0)
