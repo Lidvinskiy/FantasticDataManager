@@ -1,1 +1,1 @@
-web: gunicorn radiant-tor-56822.wsgi --log-file - --timeout 6000
+web: gunicorn radiant-tor-56822.wsgi --log-file - --timeout 10000
