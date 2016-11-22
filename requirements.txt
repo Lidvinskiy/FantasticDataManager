@@ -6,6 +6,7 @@ numpy==1.11.2
 pandas==0.19.1
 pycrypto==2.6.1
 python-dateutil==2.6.0
+-e git+https://github.com/datawizio/pythonAPI.git@2169f555c66c592e6c00fd2e6847683dce7dc1c5#egg=python_dwapi
 pytz==2016.7
 requests==2.12.1
 six==1.10.0
