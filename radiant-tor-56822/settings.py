@@ -24,7 +24,7 @@ SECRET_KEY = 'ax$z!72ra5a(y6a)%wt^)l@)l!69ns!_6xzgdc)-&k8l5q_)b@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [radiant-tor-56822.herokuapp.com]
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
