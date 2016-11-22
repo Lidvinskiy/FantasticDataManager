@@ -24,7 +24,7 @@ SECRET_KEY = 'ax$z!72ra5a(y6a)%wt^)l@)l!69ns!_6xzgdc)-&k8l5q_)b@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [radiant-tor-56822.herokuapp.com]
 
 # Application definition
 
@@ -47,7 +47,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'DataManager.urls'
+ROOT_URLCONF = 'radiant-tor-56822.urls'
 
 TEMPLATES = [
     {
@@ -67,7 +67,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'DataManager.wsgi.application'
+WSGI_APPLICATION = 'radiant-tor-56822.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
