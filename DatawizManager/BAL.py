@@ -135,10 +135,6 @@ class Creator(object):
                     except KeyError as error:
                         print error
                         continue
-        try:
-            table_grow.drop('sum')
-        except ValueError:
-            table_fall.drop('sum')
         return [table_grow.sort_values(['Зміна кількості продаж', 'Зміна обороту'], ascending=False),
                 table_fall.sort_values(['Зміна кількості продаж', 'Зміна обороту'], ascending=True)]
 
