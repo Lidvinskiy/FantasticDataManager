@@ -342,10 +342,20 @@
                        date_from_first:date_from_1,
                        date_to_first:date_to_1,
                        date_from_second:date_from_2,
-                       date_to_second:date_to_2}), function(data){
-             $("#loader").addClass("hidden");
-             $("#tablebase").html(data);
-             $("#tablebase").addClass("material-design-block");
+                       date_to_second:date_to_2,
+                       type:'get_data'}), function(data){
+
+                       if (data == "")
+                       {
+                           PingAjax(shop,date_from_1,date_to_1,date_from_2,date_to_2,'get_data');
+                       }
+                       else
+                       {
+                           $("#loader").addClass("hidden");
+                           $("#tablebase").html(data);
+                           $("#tablebase").addClass("material-design-block");
+                       }
+
              });
          }
          else {
@@ -354,7 +364,8 @@
                        date_from_first:date_from_1,
                        date_to_first:date_to_1,
                        date_from_second:date_from_2,
-                       date_to_second:date_to_2}), function(data){
+                       date_to_second:date_to_2,
+                       type:'change_inform'}), function(data){
              $("#loader").addClass("hidden");
              $("#tablereports_first").html(data['first']);
              $("#tablereports_second").html(data['second']);
@@ -365,6 +376,33 @@
 
 
 
+      }
+
+      function PingAjax(shop,date_from_first,date_to_first,date_from_second,date_to_second,type)
+      {
+                  $.get('ping_for_base/',
+                   ({shops:shop,
+                       date_from_first:date_from_first,
+                       date_to_first:date_to_first,
+                       date_from_second:date_from_second,
+                       date_to_second:date_to_second,
+                       type:type}), function(data){
+
+                       if (data == "")
+                       {
+                           console.log("ping");
+                           setTimeout(function () {
+                           PingAjax(shop,date_from_first,date_to_first,date_from_second,date_to_second,type);
+                           },5000);
+                       }
+                       else
+                       {
+                           $("#loader").addClass("hidden");
+                           $("#tablebase").html(data);
+                           $("#tablebase").addClass("material-design-block");
+                       }
+
+             });
       }
 
       function ShowReports() {

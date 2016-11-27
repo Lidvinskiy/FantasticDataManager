@@ -11,6 +11,9 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 from whitenoise.django import DjangoWhiteNoise
+from django.core.cache.backends.memcached import BaseMemcachedCache
+
+BaseMemcachedCache.close = lambda self, **kwargs: None
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "radiant-tor-56822.settings")
 

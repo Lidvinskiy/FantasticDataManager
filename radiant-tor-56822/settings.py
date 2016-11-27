@@ -23,12 +23,35 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = 'ax$z!72ra5a(y6a)%wt^)l@)l!69ns!_6xzgdc)-&k8l5q_)b@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
 # Application definition
 
+
+def get_cache():
+  import os
+  try:
+    os.environ['MEMCACHE_SERVERS'] = os.environ['MEMCACHIER_SERVERS'].replace(',', ';')
+    os.environ['MEMCACHE_USERNAME'] = os.environ['MEMCACHIER_USERNAME']
+    os.environ['MEMCACHE_PASSWORD'] = os.environ['MEMCACHIER_PASSWORD']
+    return {
+      'default': {
+        'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
+        'TIMEOUT': 2000,
+        'BINARY': True,
+        'OPTIONS': { 'tcp_nodelay': True }
+      }
+    }
+  except:
+    return {
+      'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'
+      }
+    }
+
+CACHES = get_cache()
 INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -119,6 +142,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+#STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 #STATICFILES_ROOT = (os.path.join('static'),)
