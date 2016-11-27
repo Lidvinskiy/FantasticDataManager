@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4c2f3b80-2b01-4433-be12-9eaca3dc5563" name="Default" comment="" />
+    <list default="true" id="4c2f3b80-2b01-4433-be12-9eaca3dc5563" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DatawizManager/views.py" afterPath="$PROJECT_DIR$/DatawizManager/views.py" />
+    </list>
     <ignored path="FantasticDataManager.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -34,7 +36,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BAL.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BAL.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DatawizManager/BAL.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2227">
@@ -44,11 +46,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DatawizManager/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="174">
-              <caret line="79" column="18" selection-start-line="79" selection-start-column="4" selection-end-line="79" selection-end-column="18" />
+            <state relative-caret-position="1075">
+              <caret line="138" column="45" selection-start-line="138" selection-start-column="45" selection-end-line="138" selection-end-column="45" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -135,11 +137,11 @@
         <option value="$PROJECT_DIR$/radiant-tor-56822/wsgi.py" />
         <option value="$PROJECT_DIR$/templates/Loginform.html" />
         <option value="$PROJECT_DIR$/DatawizManager/models.py" />
-        <option value="$PROJECT_DIR$/DatawizManager/views.py" />
         <option value="$PROJECT_DIR$/DatawizManager/BAL.py" />
         <option value="$PROJECT_DIR$/radiant-tor-56822/settings.py" />
         <option value="$PROJECT_DIR$/radiant-tor-56822/urls.py" />
         <option value="$PROJECT_DIR$/templates/main.html" />
+        <option value="$PROJECT_DIR$/DatawizManager/views.py" />
       </list>
     </option>
   </component>
@@ -1038,16 +1040,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DatawizManager/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="79" column="18" selection-start-line="79" selection-start-column="4" selection-end-line="79" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/radiant-tor-56822/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="663">
@@ -1061,6 +1053,16 @@
         <state relative-caret-position="2227">
           <caret line="131" column="82" selection-start-line="131" selection-start-column="82" selection-end-line="131" selection-end-column="82" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatawizManager/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1075">
+          <caret line="138" column="45" selection-start-line="138" selection-start-column="45" selection-end-line="138" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
