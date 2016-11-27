@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4c2f3b80-2b01-4433-be12-9eaca3dc5563" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/radiant-tor-56822/settings.py" afterPath="$PROJECT_DIR$/radiant-tor-56822/settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/radiant-tor-56822/urls.py" afterPath="$PROJECT_DIR$/radiant-tor-56822/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/main.html" afterPath="$PROJECT_DIR$/templates/main.html" />
     </list>
     <ignored path="FantasticDataManager.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,7 +27,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/radiant-tor-56822/settings.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="663">
@@ -49,8 +50,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DatawizManager/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-13">
-              <caret line="113" column="43" selection-start-line="113" selection-start-column="43" selection-end-line="113" selection-end-column="43" />
+            <state relative-caret-position="174">
+              <caret line="79" column="18" selection-start-line="79" selection-start-column="4" selection-end-line="79" selection-end-column="18" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -58,11 +59,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/main.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-45">
-              <caret line="381" column="7" selection-start-line="381" selection-start-column="7" selection-end-line="381" selection-end-column="7" />
+            <state relative-caret-position="448">
+              <caret line="401" column="77" selection-start-line="401" selection-start-column="77" selection-end-line="401" selection-end-column="77" />
               <folding />
             </state>
           </provider>
@@ -72,7 +73,7 @@
         <entry file="file://$PROJECT_DIR$/radiant-tor-56822/urls.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="459">
-              <caret line="27" column="23" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="23" />
+              <caret line="27" column="68" selection-start-line="27" selection-start-column="68" selection-end-line="27" selection-end-column="68" />
               <folding>
                 <element signature="e#645#677#0" expanded="true" />
               </folding>
@@ -139,8 +140,9 @@
         <option value="$PROJECT_DIR$/DatawizManager/models.py" />
         <option value="$PROJECT_DIR$/DatawizManager/views.py" />
         <option value="$PROJECT_DIR$/DatawizManager/BAL.py" />
-        <option value="$PROJECT_DIR$/templates/main.html" />
         <option value="$PROJECT_DIR$/radiant-tor-56822/settings.py" />
+        <option value="$PROJECT_DIR$/radiant-tor-56822/urls.py" />
+        <option value="$PROJECT_DIR$/templates/main.html" />
       </list>
     </option>
   </component>
@@ -985,10 +987,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Loginform.html">
+    <entry file="file://$PROJECT_DIR$/radiant-tor-56822/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
+        <state relative-caret-position="663">
+          <caret line="147" column="0" selection-start-line="147" selection-start-column="0" selection-end-line="147" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1003,28 +1005,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DatawizManager/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-13">
-          <caret line="113" column="43" selection-start-line="113" selection-start-column="43" selection-end-line="113" selection-end-column="43" />
+        <state relative-caret-position="174">
+          <caret line="79" column="18" selection-start-line="79" selection-start-column="4" selection-end-line="79" selection-end-column="18" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/main.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-45">
-          <caret line="381" column="7" selection-start-line="381" selection-start-column="7" selection-end-line="381" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/radiant-tor-56822/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="23" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="23" />
-          <folding>
-            <element signature="e#645#677#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1057,10 +1041,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/radiant-tor-56822/settings.py">
+    <entry file="file://$PROJECT_DIR$/radiant-tor-56822/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="147" column="0" selection-start-line="147" selection-start-column="0" selection-end-line="147" selection-end-column="0" />
+        <state relative-caret-position="459">
+          <caret line="27" column="68" selection-start-line="27" selection-start-column="68" selection-end-line="27" selection-end-column="68" />
+          <folding>
+            <element signature="e#645#677#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Loginform.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/main.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="448">
+          <caret line="401" column="77" selection-start-line="401" selection-start-column="77" selection-end-line="401" selection-end-column="77" />
           <folding />
         </state>
       </provider>

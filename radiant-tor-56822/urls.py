@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^main/$', vs.main_page, name='main'),
     url(r'get_data/$', vs.get_base_data_to_html, name='get_data'),
     url(r'change_inform/$', vs.change_inform, name='change_inform'),
-    url(r'ping_for_base/$', vs.ping_for_base, name='ping_for_base'),
+    url(r'ping_for_queue/$', vs.ping_for_queue, name='ping_for_queue'),
     url(r'^logout$', vs.logout, name='logout')
 ]
 urlpatterns += staticfiles_urlpatterns()
