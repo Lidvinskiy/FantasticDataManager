@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4c2f3b80-2b01-4433-be12-9eaca3dc5563" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DatawizManager/views.py" afterPath="$PROJECT_DIR$/DatawizManager/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/main.html" afterPath="$PROJECT_DIR$/templates/main.html" />
     </list>
     <ignored path="FantasticDataManager.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,18 +39,18 @@
       <file leaf-file-name="BAL.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DatawizManager/BAL.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="505">
+            <state relative-caret-position="709">
               <caret line="141" column="107" selection-start-line="141" selection-start-column="107" selection-end-line="141" selection-end-column="107" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DatawizManager/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="463">
-              <caret line="107" column="58" selection-start-line="107" selection-start-column="58" selection-end-line="107" selection-end-column="58" />
+            <state relative-caret-position="242">
+              <caret line="79" column="43" selection-start-line="79" selection-start-column="43" selection-end-line="79" selection-end-column="43" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -59,11 +58,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/main.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="394" column="51" selection-start-line="394" selection-start-column="51" selection-end-line="394" selection-end-column="51" />
+            <state relative-caret-position="360">
+              <caret line="389" column="112" selection-start-line="389" selection-start-column="112" selection-end-line="389" selection-end-column="112" />
               <folding />
             </state>
           </provider>
@@ -156,8 +155,8 @@
         <option value="$PROJECT_DIR$/radiant-tor-56822/urls.py" />
         <option value="$PROJECT_DIR$/worker.py" />
         <option value="$PROJECT_DIR$/radiant-tor-56822/settings.py" />
-        <option value="$PROJECT_DIR$/DatawizManager/views.py" />
         <option value="$PROJECT_DIR$/templates/main.html" />
+        <option value="$PROJECT_DIR$/DatawizManager/views.py" />
       </list>
     </option>
   </component>
@@ -1058,14 +1057,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DatawizManager/BAL.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="505">
-          <caret line="141" column="107" selection-start-line="141" selection-start-column="107" selection-end-line="141" selection-end-column="107" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/worker.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -1076,21 +1067,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DatawizManager/views.py">
+    <entry file="file://$PROJECT_DIR$/DatawizManager/BAL.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
-          <caret line="107" column="58" selection-start-line="107" selection-start-column="58" selection-end-line="107" selection-end-column="58" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="709">
+          <caret line="141" column="107" selection-start-line="141" selection-start-column="107" selection-end-line="141" selection-end-column="107" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/main.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="394" column="51" selection-start-line="394" selection-start-column="51" selection-end-line="394" selection-end-column="51" />
+        <state relative-caret-position="360">
+          <caret line="389" column="112" selection-start-line="389" selection-start-column="112" selection-end-line="389" selection-end-column="112" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatawizManager/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="79" column="43" selection-start-line="79" selection-start-column="43" selection-end-line="79" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

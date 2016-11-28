@@ -75,6 +75,7 @@ def BAL_create_base_inform(getinform):
                                    getinform.date_to_f,
                                    getinform.date_from_s, getinform.date_to_s).base_information_table.to_html(
         classes=['table', 'table-striped', 'table-hover', 'table-responsive'], border=0)
+    print getinform.key_to_cache
     cache.set(getinform.key_to_cache, query)
     print cache.get(getinform.key_to_cache)
 
