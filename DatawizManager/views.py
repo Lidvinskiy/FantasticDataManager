@@ -69,8 +69,6 @@ class QueueBase(object):
 
 
 def BAL_create_base_inform(getinform):
-    if not settings.configured:
-        settings.configure()
     query = BAL.create_base_inform(getinform.login, getinform.key, getinform.shops, getinform.date_from_f,
                                    getinform.date_to_f,
                                    getinform.date_from_s, getinform.date_to_s).base_information_table.to_html(
