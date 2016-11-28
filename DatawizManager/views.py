@@ -14,6 +14,8 @@ import DatawizManager.forms as forms
 import ast
 import json
 from django.conf import settings
+
+
 def Loginpage(request):
     form_class = forms.LoginForm
     return render(request, 'Loginform.html', {'form': form_class})
@@ -69,14 +71,11 @@ class QueueBase(object):
 
 
 def BAL_create_base_inform(getinform):
-    cache.set('1',1213123132213)
-    print cache.get('base')
-    print 'bal'
     query = BAL.create_base_inform(getinform.login, getinform.key, getinform.shops, getinform.date_from_f,
                                    getinform.date_to_f,
                                    getinform.date_from_s, getinform.date_to_s).base_information_table.to_html(
         classes=['table', 'table-striped', 'table-hover', 'table-responsive'], border=0)
-    #cache.set(getinform.key_to_cache, query)
+    # cache.set(getinform.key_to_cache, query)
     return query
 
 
@@ -100,7 +99,7 @@ def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date
 
 def get_base_data_to_html(request, shops='', date_from_first='', date_to_first='', date_from_second='',
                           date_to_second=''):
-    cache.set('base','base')
+    cache.set('base', 'base')
     date_from_f = datetime.datetime.strptime(request.GET['date_from_first'].encode('utf-8'), '%m/%d/%Y').date()
     date_to_f = datetime.datetime.strptime(request.GET['date_to_first'].encode('utf-8'), '%m/%d/%Y').date()
     date_from_s = datetime.datetime.strptime(request.GET['date_from_second'].encode('utf-8'), '%m/%d/%Y').date()
@@ -109,14 +108,14 @@ def get_base_data_to_html(request, shops='', date_from_first='', date_to_first='
     key = str(request.GET['type'].encode('utf-8')) + str(date_from_f) + str(date_to_f) + \
           str(date_from_s) + str(date_to_s) \
           + str(shops_int) + str(request.session['login'])
-    #cache.set('1','123')
     if cache.get(key) is None:
         q = Queue(connection=conn)
         job = q.enqueue(
             BAL_create_base_inform, QueueBase(request.session['login'], request.session['key'], shops_int, date_from_f,
                                               date_to_f,
                                               date_from_s, date_to_s, key))
-        job.id = key
+        job.set_id(key)
+        job.save()
         return HttpResponse('')
     else:
         return HttpResponse(cache.get(key))
