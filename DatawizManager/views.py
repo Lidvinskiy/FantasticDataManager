@@ -93,7 +93,7 @@ def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date
     q = Queue(connection=conn)
     #print q.fetch_job(key).is_finished
     #print q.fetch_job(key)
-    print q.job_ids
+    print q.get_current_job()
     if not q.fetch_job(key).is_finished:
         #print q.fetch_job(key).result
         return HttpResponse('')
