@@ -90,12 +90,15 @@ def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date
           str(date_from_s) + str(date_to_s) \
           + str(shops_int) + str(request.session['login'])
     q = Queue(connection=conn)
+    print q.fetch_job(key).is_finished
+    print q.fetch_job(key)
     if not q.fetch_job(key).is_finished:
         print 'govno'
         print q.fetch_job(key).result
         return HttpResponse('')
     else:
         print '1111111111111111111111'
+        cache.set(key,q.fetch_job(key).result)
         return HttpResponse(q.fetch_job(key).result)
 
 
