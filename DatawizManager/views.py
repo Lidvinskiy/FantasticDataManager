@@ -92,10 +92,11 @@ def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date
           str(date_from_s) + str(date_to_s) \
           + str(shops_int) + str(request.session['login'])
     q = Queue(connection=conn)
-    if not q.fetch_job(key).is_finished:
+    if not q.fetch_job('asdasdasdasdadasdasdasdadadadadasdasd').is_finished:
         return HttpResponse('')
     else:
-        return HttpResponse(q.fetch_job(key).result)
+        cache.set('asdasdasdasdadasdasdasdadadadadasdasd',q.fetch_job(key).result)
+        return HttpResponse(q.fetch_job('asdasdasdasdadasdasdasdadadadadasdasd').result)
 
 
 def get_base_data_to_html(request, shops='', date_from_first='', date_to_first='', date_from_second='',
@@ -110,17 +111,17 @@ def get_base_data_to_html(request, shops='', date_from_first='', date_to_first='
           str(date_from_s) + str(date_to_s) \
           + str(shops_int) + str(request.session['login'])
     #cache.set('1','123')
-    if cache.get(key) is None:
+    if cache.get('asdasdasdasdadasdasdasdadadadadasdasd') is None:
         print 'asdasdasdasdadasdasdasdadadadadasdasd'
         q = Queue(connection=conn)
         job = q.enqueue(
             BAL_create_base_inform, QueueBase(request.session['login'], request.session['key'], shops_int, date_from_f,
                                               date_to_f,
                                               date_from_s, date_to_s, key))
-        job.set_id(key)
+        job.set_id('asdasdasdasdadasdasdasdadadadadasdasd')
         return HttpResponse('')
     else:
-        return HttpResponse(cache.get(key))
+        return HttpResponse(cache.get('asdasdasdasdadasdasdasdadadadadasdasd'))
 
 
 def BAL_create_change_inform(getinform):
