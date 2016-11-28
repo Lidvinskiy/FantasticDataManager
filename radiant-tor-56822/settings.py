@@ -27,29 +27,62 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+
 # Application definition
 
 
 def get_cache():
-  import os
-  try:
-    os.environ['MEMCACHE_SERVERS'] = os.environ['MEMCACHIER_SERVERS'].replace(',', ';')
-    os.environ['MEMCACHE_USERNAME'] = os.environ['MEMCACHIER_USERNAME']
-    os.environ['MEMCACHE_PASSWORD'] = os.environ['MEMCACHIER_PASSWORD']
-    return {
-      'default': {
-        'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
-        'TIMEOUT': 2000,
-        'BINARY': True,
-        'OPTIONS': { 'tcp_nodelay': True }
-      }
-    }
-  except:
-    return {
-      'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'
-      }
-    }
+    import os
+    try:
+        os.environ['MEMCACHE_SERVERS'] = os.environ['MEMCACHIER_SERVERS'].replace(',', ';')
+        os.environ['MEMCACHE_USERNAME'] = os.environ['MEMCACHIER_USERNAME']
+        os.environ['MEMCACHE_PASSWORD'] = os.environ['MEMCACHIER_PASSWORD']
+        return {
+            'default': {
+                'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
+                'TIMEOUT': 2000,
+                'BINARY': True,
+                'OPTIONS': {'tcp_nodelay': True}
+            }
+        }
+    except:
+        return {
+            'default': {
+                'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'
+            }
+        }
+
+
+def get_queue():
+    import os
+    import urlparse
+    from redis import Redis
+    from rq import Worker, Queue, Connection
+    try:
+        url = urlparse.urlparse(os.environ.get('redistogo-spherical-73382',
+                                               'redis://redistogo:897d4c29fb07e5d500bb38d2c26c64f1@crestfish.redistogo.com:9158/'))
+        conn = Redis(host=url.hostname, port=url.port, db=0, password=url.password)
+        return {
+            'default': {
+                'HOST': url.hostname,
+                'PORT': url.port,
+                'DB': 0,
+                'PASSWORD': url.password,
+            },
+            'high': {
+                'URL': os.getenv('redistogo-spherical-73382',
+                                 'redis://redistogo:897d4c29fb07e5d500bb38d2c26c64f1@crestfish.redistogo.com:9158/'),
+            },
+            'low': {
+                'HOST': url.hostname,
+                'PORT': url.port,
+                'DB': 0,
+            }
+        }
+    except:
+        pass
+RQ_QUEUES = get_queue()
+
 
 CACHES = get_cache()
 INSTALLED_APPS = [
@@ -58,6 +91,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_rq',
     'DatawizManager',
 ]
 
@@ -144,4 +178,4 @@ STATICFILES_DIRS = (
 )
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-#STATICFILES_ROOT = (os.path.join('static'),)
+# STATICFILES_ROOT = (os.path.join('static'),)

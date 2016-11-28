@@ -13,8 +13,7 @@ import BAL
 import DatawizManager.forms as forms
 import ast
 import json
-
-
+from django.conf import settings
 def Loginpage(request):
     form_class = forms.LoginForm
     return render(request, 'Loginform.html', {'form': form_class})
@@ -70,7 +69,8 @@ class QueueBase(object):
 
 
 def BAL_create_base_inform(getinform):
-    print 123
+    if not settings.configured:
+        settings.configure()
     query = BAL.create_base_inform(getinform.login, getinform.key, getinform.shops, getinform.date_from_f,
                                    getinform.date_to_f,
                                    getinform.date_from_s, getinform.date_to_s).base_information_table.to_html(
