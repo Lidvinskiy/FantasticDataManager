@@ -70,6 +70,8 @@ class QueueBase(object):
 
 def BAL_create_base_inform(getinform):
     cache.set('1',1213123132213)
+    print cache.get('base')
+    print 'bal'
     query = BAL.create_base_inform(getinform.login, getinform.key, getinform.shops, getinform.date_from_f,
                                    getinform.date_to_f,
                                    getinform.date_from_s, getinform.date_to_s).base_information_table.to_html(
@@ -79,6 +81,7 @@ def BAL_create_base_inform(getinform):
 
 def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date_from_second='',
                    date_to_second=''):
+    print 'ping'
     date_from_f = datetime.datetime.strptime(request.GET['date_from_first'].encode('utf-8'), '%m/%d/%Y').date()
     date_to_f = datetime.datetime.strptime(request.GET['date_to_first'].encode('utf-8'), '%m/%d/%Y').date()
     date_from_s = datetime.datetime.strptime(request.GET['date_from_second'].encode('utf-8'), '%m/%d/%Y').date()
@@ -97,6 +100,7 @@ def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date
 
 def get_base_data_to_html(request, shops='', date_from_first='', date_to_first='', date_from_second='',
                           date_to_second=''):
+    cache.set('base','base')
     date_from_f = datetime.datetime.strptime(request.GET['date_from_first'].encode('utf-8'), '%m/%d/%Y').date()
     date_to_f = datetime.datetime.strptime(request.GET['date_to_first'].encode('utf-8'), '%m/%d/%Y').date()
     date_from_s = datetime.datetime.strptime(request.GET['date_from_second'].encode('utf-8'), '%m/%d/%Y').date()
