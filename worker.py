@@ -5,7 +5,7 @@ from rq import Worker, Queue, Connection
 
 listen = ['high', 'default', 'low']
 
-redis_url = os.getenv('redistogo-spherical-73382')
+redis_url = os.getenv('redis://redistogo:897d4c29fb07e5d500bb38d2c26c64f1@crestfish.redi stogo.com:9158/')
 
 conn = redis.from_url(redis_url)
 
