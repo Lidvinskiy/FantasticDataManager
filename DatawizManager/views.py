@@ -76,7 +76,8 @@ def BAL_create_base_inform(getinform):
                                    getinform.date_to_f,
                                    getinform.date_from_s, getinform.date_to_s).base_information_table.to_html(
         classes=['table', 'table-striped', 'table-hover', 'table-responsive'], border=0)
-    cache.set(getinform.key_to_cache, query)
+    #cache.set(getinform.key_to_cache, query)
+    return query
 
 
 def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date_from_second='',
@@ -90,12 +91,11 @@ def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date
     key = str(request.GET['type'].encode('utf-8')) + str(date_from_f) + str(date_to_f) + \
           str(date_from_s) + str(date_to_s) \
           + str(shops_int) + str(request.session['login'])
-    if cache.get(key) is None:
-        print cache.get('1')
-        #print key
+    q = Queue(connection=conn)
+    if not q.fetch_job(key).is_finished:
         return HttpResponse('')
     else:
-        return HttpResponse(cache.get(key))
+        return HttpResponse(q.fetch_job(key).result)
 
 
 def get_base_data_to_html(request, shops='', date_from_first='', date_to_first='', date_from_second='',
@@ -117,6 +117,7 @@ def get_base_data_to_html(request, shops='', date_from_first='', date_to_first='
             BAL_create_base_inform, QueueBase(request.session['login'], request.session['key'], shops_int, date_from_f,
                                               date_to_f,
                                               date_from_s, date_to_s, key))
+        q.set_id(key)
         return HttpResponse('')
     else:
         return HttpResponse(cache.get(key))
