@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.cache import cache
 from dwapi import datawiz
-from rq import Queue
+from rq import Queue, get_current_job
 from worker import conn
 import pandas as pd
 import datetime
@@ -93,7 +93,7 @@ def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date
     q = Queue(connection=conn)
     #print q.fetch_job(key).is_finished
     #print q.fetch_job(key)
-    print q.get_current_job()
+    print get_current_job()
     if not q.fetch_job(key).is_finished:
         #print q.fetch_job(key).result
         return HttpResponse('')
