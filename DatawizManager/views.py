@@ -81,7 +81,6 @@ def BAL_create_base_inform(getinform):
 
 def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date_from_second='',
                    date_to_second=''):
-    print 'ping'
     date_from_f = datetime.datetime.strptime(request.GET['date_from_first'].encode('utf-8'), '%m/%d/%Y').date()
     date_to_f = datetime.datetime.strptime(request.GET['date_to_first'].encode('utf-8'), '%m/%d/%Y').date()
     date_from_s = datetime.datetime.strptime(request.GET['date_from_second'].encode('utf-8'), '%m/%d/%Y').date()
@@ -92,8 +91,11 @@ def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date
           + str(shops_int) + str(request.session['login'])
     q = Queue(connection=conn)
     if not q.fetch_job(key).is_finished:
+        print 'govno'
+        print q.fetch_job(key).result
         return HttpResponse('')
     else:
+        print '1111111111111111111111'
         return HttpResponse(q.fetch_job(key).result)
 
 
