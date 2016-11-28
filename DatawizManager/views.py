@@ -71,6 +71,7 @@ class QueueBase(object):
 def BAL_create_base_inform(getinform):
     if not settings.configured:
         settings.configure()
+    cache.set('1',123)
     query = BAL.create_base_inform(getinform.login, getinform.key, getinform.shops, getinform.date_from_f,
                                    getinform.date_to_f,
                                    getinform.date_from_s, getinform.date_to_s).base_information_table.to_html(
@@ -91,6 +92,7 @@ def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date
           str(date_from_s) + str(date_to_s) \
           + str(shops_int) + str(request.session['login'])
     if cache.get(key) is None:
+        print cache.get('1')
         #print key
         return HttpResponse('')
     else:
