@@ -5,7 +5,7 @@ from rq import Worker, Queue, Connection
 
 listen = ['high', 'default', 'low']
 
-redis_url = os.getenv('redis://redistogo:897d4c29fb07e5d500bb38d2c26c64f1@crestfish.redi stogo.com:9158/')
+redis_url = os.getenv('redistogo-spherical-73382','redis://redistogo:897d4c29fb07e5d500bb38d2c26c64f1@crestfish.redistogo.com:9158/')
 url = urlparse.uses_netloc(redis_url)
 conn = Redis(host=url.hostname, port=url.port, db=0, password=url.password)
 
