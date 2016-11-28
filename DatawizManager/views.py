@@ -74,6 +74,7 @@ def BAL_create_base_inform(getinform):
                                    getinform.date_to_f,
                                    getinform.date_from_s, getinform.date_to_s).base_information_table.to_html(
         classes=['table', 'table-striped', 'table-hover', 'table-responsive'], border=0)
+    print query
     cache.set(getinform.key_to_cache, query)
 
 
@@ -88,7 +89,7 @@ def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date
           str(date_from_s) + str(date_to_s) \
           + str(shops_int) + str(request.session['login'])
     if cache.get(key) is None:
-        return HttpResponse('')
+        return HttpResponse(json.dumps(None))
     else:
         return HttpResponse(cache.get(key))
 
