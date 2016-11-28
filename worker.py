@@ -9,6 +9,11 @@ redis_url = os.getenv('redistogo-spherical-73382')
 
 conn = redis.from_url(redis_url)
 
+
+def get_conn():
+    return conn
+
+
 if __name__ == '__main__':
     with Connection(conn):
         worker = Worker(map(Queue, listen))
