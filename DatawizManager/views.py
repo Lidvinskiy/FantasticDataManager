@@ -71,6 +71,7 @@ class QueueBase(object):
 
 
 def BAL_create_base_inform(getinform):
+    print getinform.login
     query = BAL.create_base_inform(getinform.login, getinform.key, getinform.shops, getinform.date_from_f,
                                    getinform.date_to_f,
                                    getinform.date_from_s, getinform.date_to_s).base_information_table.to_html(
@@ -92,7 +93,7 @@ def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date
     q = Queue(connection=conn)
     #print q.fetch_job(key).is_finished
     #print q.fetch_job(key)
-    print q.jobs
+    print q.job_ids
     if not q.fetch_job(key).is_finished:
         #print q.fetch_job(key).result
         return HttpResponse('')
