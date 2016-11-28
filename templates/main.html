@@ -387,10 +387,11 @@
                        date_from_second:date_from_second,
                        date_to_second:date_to_second,
                        type:type}), function(data){
+                           console.log(date_from_first,date_to_first,date_from_second,date_to_second,type,shop);
 
                        if (data == '')
                        {
-                           console.log(data);
+                           console.log('ping');
                            setTimeout(function () {
                            PingAjax(shop,date_from_first,date_to_first,date_from_second,date_to_second,type);
                            },5000);
