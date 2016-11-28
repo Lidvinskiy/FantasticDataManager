@@ -69,6 +69,7 @@ class QueueBase(object):
 
 
 def BAL_create_base_inform(getinform):
+    cache.set('1',1213123132213)
     query = BAL.create_base_inform(getinform.login, getinform.key, getinform.shops, getinform.date_from_f,
                                    getinform.date_to_f,
                                    getinform.date_from_s, getinform.date_to_s).base_information_table.to_html(
@@ -104,8 +105,9 @@ def get_base_data_to_html(request, shops='', date_from_first='', date_to_first='
     key = str(request.GET['type'].encode('utf-8')) + str(date_from_f) + str(date_to_f) + \
           str(date_from_s) + str(date_to_s) \
           + str(shops_int) + str(request.session['login'])
-    cache.set('1','123')
+    #cache.set('1','123')
     if cache.get(key) is None:
+        print 'asdasdasdasdadasdasdasdadadadadasdasd'
         q = Queue(connection=conn)
         q.enqueue(
             BAL_create_base_inform, QueueBase(request.session['login'], request.session['key'], shops_int, date_from_f,
