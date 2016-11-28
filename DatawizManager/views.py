@@ -120,6 +120,8 @@ def get_base_data_to_html(request, shops='', date_from_first='', date_to_first='
                                               date_to_f,
                                               date_from_s, date_to_s, key))
         job.set_id(key)
+        print job
+        print job.id
         job.save()
         return HttpResponse('')
     else:
