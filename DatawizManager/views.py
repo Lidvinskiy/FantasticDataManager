@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.core.cache import cache
 from dwapi import datawiz
 from rq import Queue
-from worker import conn
+from worker import *
 import pandas as pd
 import datetime
 import BAL
@@ -103,6 +103,7 @@ def get_base_data_to_html(request, shops='', date_from_first='', date_to_first='
     key = str(request.GET['type'].encode('utf-8')) + str(date_from_f) + str(date_to_f) + \
           str(date_from_s) + str(date_to_s) \
           + str(shops_int) + str(request.session['login'])
+    print conn
     if cache.get(key) is None:
         q = Queue(connection=conn)
         q.enqueue(
