@@ -70,11 +70,11 @@ class QueueBase(object):
 
 
 def BAL_create_base_inform(getinform):
+    print 123
     query = BAL.create_base_inform(getinform.login, getinform.key, getinform.shops, getinform.date_from_f,
                                    getinform.date_to_f,
                                    getinform.date_from_s, getinform.date_to_s).base_information_table.to_html(
         classes=['table', 'table-striped', 'table-hover', 'table-responsive'], border=0)
-    print query
     cache.set(getinform.key_to_cache, query)
 
 
@@ -89,7 +89,7 @@ def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date
           str(date_from_s) + str(date_to_s) \
           + str(shops_int) + str(request.session['login'])
     if cache.get(key) is None:
-        print key
+        #print key
         return HttpResponse('')
     else:
         return HttpResponse(cache.get(key))
@@ -105,8 +105,8 @@ def get_base_data_to_html(request, shops='', date_from_first='', date_to_first='
     key = str(request.GET['type'].encode('utf-8')) + str(date_from_f) + str(date_to_f) + \
           str(date_from_s) + str(date_to_s) \
           + str(shops_int) + str(request.session['login'])
-    print key
-    print conn
+    #print key
+    #print conn
     if cache.get(key) is None:
         q = Queue(connection=conn)
         q.enqueue(
