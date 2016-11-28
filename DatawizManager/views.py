@@ -73,7 +73,7 @@ def BAL_create_base_inform(getinform):
                                    getinform.date_to_f,
                                    getinform.date_from_s, getinform.date_to_s).base_information_table.to_html(
         classes=['table', 'table-striped', 'table-hover', 'table-responsive'], border=0)
-    return cache.set(getinform.key_to_cache, query)
+    cache.set(getinform.key_to_cache, query)
 
 
 def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date_from_second='',
