@@ -6,14 +6,13 @@ from django.http import HttpResponse
 from django.core.cache import cache
 from dwapi import datawiz
 from rq import Queue
-from worker import get_conn
+from worker import conn
 import pandas as pd
 import datetime
 import BAL
 import DatawizManager.forms as forms
 import ast
 import json
-conn = get_conn()
 
 
 def Loginpage(request):

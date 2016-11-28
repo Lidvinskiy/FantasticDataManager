@@ -1,13 +1,13 @@
 import os
-
-import redis
+import urlparse
+from redis import Redis
 from rq import Worker, Queue, Connection
 
 listen = ['high', 'default', 'low']
 
 redis_url = os.getenv('redis://redistogo:897d4c29fb07e5d500bb38d2c26c64f1@crestfish.redi stogo.com:9158/')
-
-conn = redis.from_url(redis_url)
+url = urlparse.uses_netloc(redis_url)
+conn = Redis(host=url.hostname, port=url.port, db=0, password=url.password)
 
 
 def get_conn():
