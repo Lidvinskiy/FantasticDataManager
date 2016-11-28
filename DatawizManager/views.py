@@ -111,7 +111,7 @@ def get_base_data_to_html(request, shops='', date_from_first='', date_to_first='
             BAL_create_base_inform,QueueBase(request.session['login'], request.session['key'], shops_int, date_from_f,
                                              date_to_f,
                                              date_from_s, date_to_s, key))
-        return HttpResponse('')
+        return HttpResponse(json.dumps(None))
     else:
         return HttpResponse(cache.get(key))
 
@@ -146,7 +146,7 @@ def change_inform(request, shops='', date_from_first='', date_to_first='', date_
             BAL_create_change_inform,QueueBase(request.session['login'], request.session['key'], shops_int, date_from_f,
                                              date_to_f,
                                              date_from_s, date_to_s, key))
-        return HttpResponse('')
+        return HttpResponse(json.dumps(None))
 
     else:
         return HttpResponse(cache.get(key))
