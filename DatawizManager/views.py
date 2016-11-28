@@ -79,7 +79,7 @@ def BAL_create_base_inform(getinform):
 
 
 def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date_from_second='',
-                  date_to_second=''):
+                   date_to_second=''):
     date_from_f = datetime.datetime.strptime(request.GET['date_from_first'].encode('utf-8'), '%m/%d/%Y').date()
     date_to_f = datetime.datetime.strptime(request.GET['date_to_first'].encode('utf-8'), '%m/%d/%Y').date()
     date_from_s = datetime.datetime.strptime(request.GET['date_from_second'].encode('utf-8'), '%m/%d/%Y').date()
@@ -89,7 +89,8 @@ def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date
           str(date_from_s) + str(date_to_s) \
           + str(shops_int) + str(request.session['login'])
     if cache.get(key) is None:
-        return HttpResponse(json.dumps(None))
+        print key
+        return HttpResponse('')
     else:
         return HttpResponse(cache.get(key))
 
@@ -104,22 +105,23 @@ def get_base_data_to_html(request, shops='', date_from_first='', date_to_first='
     key = str(request.GET['type'].encode('utf-8')) + str(date_from_f) + str(date_to_f) + \
           str(date_from_s) + str(date_to_s) \
           + str(shops_int) + str(request.session['login'])
+    print key
     print conn
     if cache.get(key) is None:
         q = Queue(connection=conn)
         q.enqueue(
-            BAL_create_base_inform,QueueBase(request.session['login'], request.session['key'], shops_int, date_from_f,
-                                             date_to_f,
-                                             date_from_s, date_to_s, key))
-        return HttpResponse(json.dumps(None))
+            BAL_create_base_inform, QueueBase(request.session['login'], request.session['key'], shops_int, date_from_f,
+                                              date_to_f,
+                                              date_from_s, date_to_s, key))
+        return HttpResponse('')
     else:
         return HttpResponse(cache.get(key))
 
 
 def BAL_create_change_inform(getinform):
     query = BAL.create_change_inform(getinform.login, getinform.key, getinform.shops, getinform.date_from_f,
-                                   getinform.date_to_f,
-                                   getinform.date_from_s, getinform.date_to_s)
+                                     getinform.date_to_f,
+                                     getinform.date_from_s, getinform.date_to_s)
     data = {}
     data['first'] = query[0].to_html(
         classes=['table', 'table-striped', 'table-hover', 'table-responsive', 'table-report'], border=0)
@@ -143,10 +145,11 @@ def change_inform(request, shops='', date_from_first='', date_to_first='', date_
     if cache.get(key) is None:
         q = Queue(connection=conn)
         q.enqueue(
-            BAL_create_change_inform,QueueBase(request.session['login'], request.session['key'], shops_int, date_from_f,
-                                             date_to_f,
-                                             date_from_s, date_to_s, key))
-        return HttpResponse(json.dumps(None))
+            BAL_create_change_inform,
+            QueueBase(request.session['login'], request.session['key'], shops_int, date_from_f,
+                      date_to_f,
+                      date_from_s, date_to_s, key))
+        return HttpResponse('')
 
     else:
         return HttpResponse(cache.get(key))

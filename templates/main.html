@@ -345,7 +345,7 @@
                        date_to_second:date_to_2,
                        type:'get_data'}), function(data){
 
-                       if (data == null)
+                       if (data == '')
                        {
                            PingAjax(shop,date_from_1,date_to_1,date_from_2,date_to_2,'get_data');
                        }
@@ -388,7 +388,7 @@
                        date_to_second:date_to_second,
                        type:type}), function(data){
 
-                       if (data == null)
+                       if (data == '')
                        {
                            console.log(data);
                            setTimeout(function () {
