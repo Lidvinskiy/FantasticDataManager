@@ -14,7 +14,9 @@ import DatawizManager.forms as forms
 import ast
 import json
 from django.conf import settings
+
 q = Queue(connection=conn)
+
 
 def Loginpage(request):
     form_class = forms.LoginForm
@@ -90,11 +92,12 @@ def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date
     key = str(request.GET['type'].encode('utf-8')) + str(date_from_f) + str(date_to_f) + \
           str(date_from_s) + str(date_to_s) \
           + str(shops_int) + str(request.session['login'])
-    print get_current_job()
+    # print get_current_job()
+    #print q.fetch_job(key)
     if not q.fetch_job(key).is_finished:
         return HttpResponse('')
     else:
-        cache.set(key,q.fetch_job(key).result)
+        cache.set(key, q.fetch_job(key).result)
         return HttpResponse(q.fetch_job(key).result)
 
 
