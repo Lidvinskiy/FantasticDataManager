@@ -93,7 +93,7 @@ def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date
           str(date_from_s) + str(date_to_s) \
           + str(shops_int) + str(request.session['login'])
     # print get_current_job()
-    #print q.fetch_job(key)
+    print q.fetch_job(key)
     if not q.fetch_job(key).is_finished:
         return HttpResponse('')
     else:
