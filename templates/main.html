@@ -347,7 +347,10 @@
 
                        if (data['data'] == '')
                        {
-                           PingAjax(shop,date_from_1,date_to_1,date_from_2,date_to_2,'get_data');
+                           setTimeout(function () {
+                               PingAjax(shop,date_from_1,date_to_1,date_from_2,date_to_2,'get_data');
+                           },10000);
+
                        }
                        else
                        {
@@ -368,7 +371,11 @@
                        type:'change_inform'}), function(data){
                        if (data['data'] == '')
                        {
-                           PingAjax(shop,date_from_1,date_to_1,date_from_2,date_to_2,'change_inform');
+                           setTimeout(function () {
+                                       PingAjax(shop,date_from_1,date_to_1,date_from_2,date_to_2,'change_inform');
+
+                           },10000);
+
                        }
                        else {
                            $("#loader").addClass("hidden");
