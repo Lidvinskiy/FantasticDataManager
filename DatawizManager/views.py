@@ -1,3 +1,4 @@
+# coding=utf-8
 import os
 from _pylibmc import MemcachedError
 
@@ -17,19 +18,19 @@ from django.conf import settings
 
 q = Queue(connection=conn)
 
-
+# повертае сторінку авторизації
 def Loginpage(request):
     form_class = forms.LoginForm
     return render(request, 'Loginform.html', {'form': form_class})
 
-
+# функція деавторизації
 def logout(request):
     for key in request.session.keys():
         del request.session[key]
     form_class = forms.LoginForm
     return render(request, 'Loginform.html', {'form': form_class})
 
-
+# повертае головну сторінку
 def main_page(request):
     try:
         tr = request.session['key']
@@ -38,7 +39,7 @@ def main_page(request):
         form_class = forms.LoginForm
         return render(request, 'Loginform.html', {'form': form_class})
 
-
+# функція авторизації
 def login(request):
     if request.method == 'POST':
         login = request.POST.get('login')
@@ -71,7 +72,7 @@ class QueueBase(object):
         self.date_to_s = date_to_s
         self.key_to_cache = key_to_cache
 
-
+# повертає базову інформацію по магазинам за проміжок часу в форматі json
 def BAL_create_base_inform(getinform):
     query = BAL.create_base_inform(getinform.login, getinform.key, getinform.shops, getinform.date_from_f,
                                    getinform.date_to_f,
@@ -82,7 +83,7 @@ def BAL_create_base_inform(getinform):
     data['data'] = 'full'
     return json.dumps(data)
 
-
+# перевіряе чи робота виконана ,якщо так то повертае результат
 def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date_from_second='',
                    date_to_second=''):
     date_from_f = datetime.datetime.strptime(request.GET['date_from_first'].encode('utf-8'), '%m/%d/%Y').date()
@@ -95,7 +96,7 @@ def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date
           + str(shops_int) + str(request.session['login'])
     if request.GET['type'] == 'get_base':
         job = q.fetch_job(request.session['get_base_q_id'])
-    elif request.GET['type'] == 'change_inform':
+    else:
         job = q.fetch_job(request.session['get_change_q_id'])
     if not job.is_finished:
         data = {}
@@ -105,7 +106,7 @@ def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date
         cache.set(key, job.result)
         return HttpResponse(job.result)
 
-
+# запускає процес отримання базової інформації по магазинам , або повертае її з кеша
 def get_base_data_to_html(request, shops='', date_from_first='', date_to_first='', date_from_second='',
                           date_to_second=''):
     date_from_f = datetime.datetime.strptime(request.GET['date_from_first'].encode('utf-8'), '%m/%d/%Y').date()
@@ -128,7 +129,7 @@ def get_base_data_to_html(request, shops='', date_from_first='', date_to_first='
     else:
         return HttpResponse(cache.get(key))
 
-
+# повертає інформацію про зміну продажу товарів в форматі json
 def BAL_create_change_inform(getinform):
     query = BAL.create_change_inform(getinform.login, getinform.key, getinform.shops, getinform.date_from_f,
                                      getinform.date_to_f,
@@ -141,7 +142,7 @@ def BAL_create_change_inform(getinform):
     data['data'] = 'full'
     return json.dumps(data)
 
-
+# запускає процес отримання інформації про зміну продажу товарів або повертає її з кешу
 def change_inform(request, shops='', date_from_first='', date_to_first='', date_from_second='',
                   date_to_second=''):
     date_from_f = datetime.datetime.strptime(request.GET['date_from_first'].encode('utf-8'), '%m/%d/%Y').date()
