@@ -93,13 +93,14 @@ def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date
           str(date_from_s) + str(date_to_s) \
           + str(shops_int) + str(request.session['login'])
     # print get_current_job()
-    print q.fetch(key)
-    print q.fetch(key).return_value
-    if not q.fetch(key).is_finished:
+    job = q.fetch_job(key)
+    print job
+    print job.result
+    if not job.is_finished:
         return HttpResponse('')
     else:
-        cache.set(key, q.fetch(key).return_value)
-        return HttpResponse(q.fetch(key).return_value)
+        cache.set(key, job.result)
+        return HttpResponse(job.result)
 
 
 def get_base_data_to_html(request, shops='', date_from_first='', date_to_first='', date_from_second='',
