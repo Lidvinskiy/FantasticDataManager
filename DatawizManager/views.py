@@ -73,7 +73,6 @@ class QueueBase(object):
 
 
 def BAL_create_base_inform(getinform):
-    print getinform.login
     query = BAL.create_base_inform(getinform.login, getinform.key, getinform.shops, getinform.date_from_f,
                                    getinform.date_to_f,
                                    getinform.date_from_s, getinform.date_to_s).base_information_table.to_html(
@@ -119,9 +118,10 @@ def get_base_data_to_html(request, shops='', date_from_first='', date_to_first='
             BAL_create_base_inform, QueueBase(request.session['login'], request.session['key'], shops_int, date_from_f,
                                               date_to_f,
                                               date_from_s, date_to_s, key))
+        print job.id+ '     main id'
         job.set_id(key)
         print job
-        print job.id
+        print job.id+'  sssss'
         job.save()
         return HttpResponse('')
     else:
