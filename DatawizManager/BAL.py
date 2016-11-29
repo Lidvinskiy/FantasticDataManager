@@ -36,7 +36,7 @@ class DateInformation(object):
             self.avr_receipt)
 
 
-# конструктор класу створюе таблицю з двох таблиць (про продажі в магазинах за проміжок часу таблицю) та їх порівняння
+# конструктор класу створюе таблицю з двох таблиць (про продажі в магазинах за проміжок часу ) та їх порівняння
 class BaseInformation(object):
     def __init__(self, first_day, second_day):
         if first_day.date_from == first_day.date_to and second_day.date_from == second_day.date_to:

@@ -85,7 +85,7 @@ def BAL_create_base_inform(getinform):
 
 # перевіряе чи робота виконана ,якщо так то повертае результат
 def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date_from_second='',
-                   date_to_second=''):
+                   date_to_second='', type=''):
     date_from_f = datetime.datetime.strptime(request.GET['date_from_first'].encode('utf-8'), '%m/%d/%Y').date()
     date_to_f = datetime.datetime.strptime(request.GET['date_to_first'].encode('utf-8'), '%m/%d/%Y').date()
     date_from_s = datetime.datetime.strptime(request.GET['date_from_second'].encode('utf-8'), '%m/%d/%Y').date()
