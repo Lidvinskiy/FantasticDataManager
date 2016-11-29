@@ -92,9 +92,7 @@ def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date
           str(date_from_s) + str(date_to_s) \
           + str(shops_int) + str(request.session['login'])
     # print get_current_job()
-    job = q.fetch_job(key)
-    print job
-    print job.result
+    job = q.fetch_job(request.session['get_base_q_id'])
     if not job.is_finished:
         return HttpResponse('')
     else:
@@ -118,11 +116,7 @@ def get_base_data_to_html(request, shops='', date_from_first='', date_to_first='
             BAL_create_base_inform, QueueBase(request.session['login'], request.session['key'], shops_int, date_from_f,
                                               date_to_f,
                                               date_from_s, date_to_s, key))
-        print job.id+ '     main id'
-        job.set_id(key)
-        print job
-        print job.id+'  sssss'
-        job.save()
+        request.session['get_base_q_id'] = job.id
         return HttpResponse('')
     else:
         return HttpResponse(cache.get(key))
