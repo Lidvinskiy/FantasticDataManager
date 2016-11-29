@@ -94,7 +94,9 @@ def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date
           + str(shops_int) + str(request.session['login'])
     # print get_current_job()
     print q.fetch_job(key)
-    if not q.fetch_job(key).is_finished:
+    print q.fetch_job(key).result
+    if q.fetch_job(key).result is None:
+
         return HttpResponse('')
     else:
         cache.set(key, q.fetch_job(key).result)
