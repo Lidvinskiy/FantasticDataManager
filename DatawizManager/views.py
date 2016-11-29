@@ -100,6 +100,7 @@ def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date
     key = str(request.GET['type'].encode('utf-8')) + str(date_from_f) + str(date_to_f) + \
           str(date_from_s) + str(date_to_s) \
           + str(shops_int) + str(request.session['login'])
+    # отримуемо результат завдання з черги по id
     if str(request.GET['type'].encode('utf-8')) == 'get_data':
         job = q.fetch_job(request.session['get_base_q_id'])
     elif str(request.GET['type'].encode('utf-8')) == 'change_inform':
@@ -124,6 +125,7 @@ def get_base_data_to_html(request, shops='', date_from_first='', date_to_first='
           str(date_from_s) + str(date_to_s) \
           + str(shops_int) + str(request.session['login'])
     if cache.get(key) is None:
+        # додаємо завдання до черги
         job = q.enqueue(
             BAL_create_base_inform, QueueBase(request.session['login'], request.session['key'], shops_int, date_from_f,
                                               date_to_f,
@@ -167,6 +169,7 @@ def change_inform(request, shops='', date_from_first='', date_to_first='', date_
           str(date_from_s) + str(date_to_s) \
           + str(shops_int) + str(request.session['login'])
     if cache.get(key) is None:
+        # додаємо завдання до черги
         job = q.enqueue(
             BAL_create_change_inform,
             QueueBase(request.session['login'], request.session['key'], shops_int, date_from_f,
