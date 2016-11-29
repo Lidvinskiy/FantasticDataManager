@@ -352,11 +352,11 @@
                        else
                        {
                            $("#loader").addClass("hidden");
-                           $("#tablebase").html(data);
+                           $("#tablebase").html(data['base']);
                            $("#tablebase").addClass("material-design-block");
                        }
 
-             });
+             },'json');
          }
          else {
            $.get('change_inform/',
@@ -366,11 +366,17 @@
                        date_from_second:date_from_2,
                        date_to_second:date_to_2,
                        type:'change_inform'}), function(data){
-             $("#loader").addClass("hidden");
-             $("#tablereports_first").html(data['first']);
-             $("#tablereports_second").html(data['second']);
-             $("#tablereports_first").addClass("material-design-block");
-             $("#tablereports_second").addClass("material-design-block");
+                       if (data == '')
+                       {
+                           PingAjax(shop,date_from_1,date_to_1,date_from_2,date_to_2,'change_inform');
+                       }
+                       else {
+                           $("#loader").addClass("hidden");
+                           $("#tablereports_first").html(data['first']);
+                           $("#tablereports_second").html(data['second']);
+                           $("#tablereports_first").addClass("material-design-block");
+                           $("#tablereports_second").addClass("material-design-block");
+                       }
              },'json');
          }
 
@@ -397,12 +403,23 @@
                        }
                        else
                        {
-                           $("#loader").addClass("hidden");
-                           $("#tablebase").html(data);
-                           $("#tablebase").addClass("material-design-block");
-                       }
+                           if (type == 'get_data')
+                           {
+                               $("#loader").addClass("hidden");
+                               $("#tablebase").html(data['base']);
+                               $("#tablebase").addClass("material-design-block");
+                           }
+                            else {
+                               $("#loader").addClass("hidden");
+                               $("#tablereports_first").html(data['first']);
+                               $("#tablereports_second").html(data['second']);
+                               $("#tablereports_first").addClass("material-design-block");
+                               $("#tablereports_second").addClass("material-design-block");
+                           }
+                           }
 
-             });
+
+             },'json');
       }
 
       function ShowReports() {

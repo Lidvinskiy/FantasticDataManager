@@ -77,8 +77,9 @@ def BAL_create_base_inform(getinform):
                                    getinform.date_to_f,
                                    getinform.date_from_s, getinform.date_to_s).base_information_table.to_html(
         classes=['table', 'table-striped', 'table-hover', 'table-responsive'], border=0)
-    # cache.set(getinform.key_to_cache, query)
-    return query
+    data = {}
+    data['base'] = query
+    return json.dumps(data)
 
 
 def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date_from_second='',
@@ -91,8 +92,10 @@ def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date
     key = str(request.GET['type'].encode('utf-8')) + str(date_from_f) + str(date_to_f) + \
           str(date_from_s) + str(date_to_s) \
           + str(shops_int) + str(request.session['login'])
-    # print get_current_job()
-    job = q.fetch_job(request.session['get_base_q_id'])
+    if request.GET['type'] == 'get_base':
+        job = q.fetch_job(request.session['get_base_q_id'])
+    elif request.GET['type'] == 'change_inform':
+        job = q.fetch_job(request.session['get_change_q_id'])
     if not job.is_finished:
         return HttpResponse('')
     else:
@@ -102,7 +105,6 @@ def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date
 
 def get_base_data_to_html(request, shops='', date_from_first='', date_to_first='', date_from_second='',
                           date_to_second=''):
-    cache.set('base', 'base')
     date_from_f = datetime.datetime.strptime(request.GET['date_from_first'].encode('utf-8'), '%m/%d/%Y').date()
     date_to_f = datetime.datetime.strptime(request.GET['date_to_first'].encode('utf-8'), '%m/%d/%Y').date()
     date_from_s = datetime.datetime.strptime(request.GET['date_from_second'].encode('utf-8'), '%m/%d/%Y').date()
@@ -131,9 +133,7 @@ def BAL_create_change_inform(getinform):
         classes=['table', 'table-striped', 'table-hover', 'table-responsive', 'table-report'], border=0)
     data['second'] = query[1].to_html(
         classes=['table', 'table-striped', 'table-hover', 'table-responsive', 'table-report'], border=0)
-    json_data = json.dumps(data)
-
-    cache.set(getinform.key_to_cache, json_data)
+    return json.dumps(data)
 
 
 def change_inform(request, shops='', date_from_first='', date_to_first='', date_from_second='',
@@ -147,11 +147,12 @@ def change_inform(request, shops='', date_from_first='', date_to_first='', date_
           str(date_from_s) + str(date_to_s) \
           + str(shops_int) + str(request.session['login'])
     if cache.get(key) is None:
-        q.enqueue(
+        job = q.enqueue(
             BAL_create_change_inform,
             QueueBase(request.session['login'], request.session['key'], shops_int, date_from_f,
                       date_to_f,
                       date_from_s, date_to_s, key))
+        request.session['get_change_q_id'] = job.id
         return HttpResponse('')
 
     else:
