@@ -74,10 +74,16 @@ class QueueBase(object):
 
 # повертає базову інформацію по магазинам за проміжок часу в форматі json
 def BAL_create_base_inform(getinform):
-    query = BAL.create_base_inform(getinform.login, getinform.key, getinform.shops, getinform.date_from_f,
-                                   getinform.date_to_f,
-                                   getinform.date_from_s, getinform.date_to_s).base_information_table.to_html(
-        classes=['table', 'table-striped', 'table-hover', 'table-responsive'], border=0)
+    try:
+        query = BAL.create_base_inform(getinform.login, getinform.key, getinform.shops, getinform.date_from_f,
+                                       getinform.date_to_f,
+                                       getinform.date_from_s, getinform.date_to_s).base_information_table.to_html(
+            classes=['table', 'table-striped', 'table-hover', 'table-responsive'], border=0)
+    except:
+        data = {}
+        data['base'] = '<h3>Відсутні дані за вашим запитом</h3>'
+        data['data'] = 'full'
+        return json.dumps(data)
     data = {}
     data['base'] = query
     data['data'] = 'full'
@@ -131,9 +137,16 @@ def get_base_data_to_html(request, shops='', date_from_first='', date_to_first='
 
 # повертає інформацію про зміну продажу товарів в форматі json
 def BAL_create_change_inform(getinform):
-    query = BAL.create_change_inform(getinform.login, getinform.key, getinform.shops, getinform.date_from_f,
-                                     getinform.date_to_f,
-                                     getinform.date_from_s, getinform.date_to_s)
+    try:
+        query = BAL.create_change_inform(getinform.login, getinform.key, getinform.shops, getinform.date_from_f,
+                                         getinform.date_to_f,
+                                         getinform.date_from_s, getinform.date_to_s)
+    except:
+        data = {}
+        data['first'] = '<h3>Відсутні дані за вашим запитом</h3>'
+        data['second'] = '<h3>Відсутні дані за вашим запитом</h3>'
+        data['data'] = 'full'
+        return json.dumps(data)
     data = {}
     data['first'] = query[0].to_html(
         classes=['table', 'table-striped', 'table-hover', 'table-responsive', 'table-report'], border=0)

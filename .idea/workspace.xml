@@ -49,8 +49,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DatawizManager/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-68">
-              <caret line="110" column="45" selection-start-line="110" selection-start-column="45" selection-end-line="110" selection-end-column="45" />
+            <state relative-caret-position="510">
+              <caret line="147" column="29" selection-start-line="147" selection-start-column="29" selection-end-line="147" selection-end-column="29" />
               <folding>
                 <element signature="e#15#24#0" expanded="true" />
               </folding>
@@ -574,7 +574,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1456" height="876" extended-state="7" />
+    <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3298611" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1061,8 +1061,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DatawizManager/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-68">
-          <caret line="110" column="45" selection-start-line="110" selection-start-column="45" selection-end-line="110" selection-end-column="45" />
+        <state relative-caret-position="510">
+          <caret line="147" column="29" selection-start-line="147" selection-start-column="29" selection-end-line="147" selection-end-column="29" />
           <folding>
             <element signature="e#15#24#0" expanded="true" />
           </folding>
