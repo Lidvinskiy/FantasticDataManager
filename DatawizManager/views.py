@@ -79,6 +79,7 @@ def BAL_create_base_inform(getinform):
         classes=['table', 'table-striped', 'table-hover', 'table-responsive'], border=0)
     data = {}
     data['base'] = query
+    data['data'] = 'full'
     return json.dumps(data)
 
 
@@ -97,7 +98,9 @@ def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date
     elif request.GET['type'] == 'change_inform':
         job = q.fetch_job(request.session['get_change_q_id'])
     if not job.is_finished:
-        return HttpResponse('')
+        data = {}
+        data['data'] = ''
+        return HttpResponse(json.dumps(data))
     else:
         cache.set(key, job.result)
         return HttpResponse(job.result)
@@ -119,7 +122,9 @@ def get_base_data_to_html(request, shops='', date_from_first='', date_to_first='
                                               date_to_f,
                                               date_from_s, date_to_s, key))
         request.session['get_base_q_id'] = job.id
-        return HttpResponse('')
+        data = {}
+        data['data'] = ''
+        return HttpResponse(json.dumps(data))
     else:
         return HttpResponse(cache.get(key))
 
@@ -133,6 +138,7 @@ def BAL_create_change_inform(getinform):
         classes=['table', 'table-striped', 'table-hover', 'table-responsive', 'table-report'], border=0)
     data['second'] = query[1].to_html(
         classes=['table', 'table-striped', 'table-hover', 'table-responsive', 'table-report'], border=0)
+    data['data'] = 'full'
     return json.dumps(data)
 
 
@@ -153,7 +159,9 @@ def change_inform(request, shops='', date_from_first='', date_to_first='', date_
                       date_to_f,
                       date_from_s, date_to_s, key))
         request.session['get_change_q_id'] = job.id
-        return HttpResponse('')
+        data = {}
+        data['data'] = ''
+        return HttpResponse(json.dumps(data))
 
     else:
         return HttpResponse(cache.get(key))

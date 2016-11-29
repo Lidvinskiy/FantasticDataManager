@@ -345,7 +345,7 @@
                        date_to_second:date_to_2,
                        type:'get_data'}), function(data){
 
-                       if (data == '')
+                       if (data['data'] == '')
                        {
                            PingAjax(shop,date_from_1,date_to_1,date_from_2,date_to_2,'get_data');
                        }
@@ -366,7 +366,7 @@
                        date_from_second:date_from_2,
                        date_to_second:date_to_2,
                        type:'change_inform'}), function(data){
-                       if (data == '')
+                       if (data['data'] == '')
                        {
                            PingAjax(shop,date_from_1,date_to_1,date_from_2,date_to_2,'change_inform');
                        }
@@ -394,7 +394,7 @@
                        date_to_second:date_to_second,
                        type:type}), function(data){
 
-                       if (data == '')
+                       if (data['data'] == '')
                        {
                            console.log('ping');
                            setTimeout(function () {
