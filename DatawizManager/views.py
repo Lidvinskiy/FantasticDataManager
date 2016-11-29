@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.cache import cache
 from dwapi import datawiz
-from rq import Queue, get_current_job, Job
+from rq import Queue, get_current_job
 from worker import conn
 import pandas as pd
 import datetime
@@ -78,7 +78,6 @@ def BAL_create_base_inform(getinform):
                                    getinform.date_to_f,
                                    getinform.date_from_s, getinform.date_to_s).base_information_table.to_html(
         classes=['table', 'table-striped', 'table-hover', 'table-responsive'], border=0)
-
     # cache.set(getinform.key_to_cache, query)
     return query
 
@@ -94,14 +93,13 @@ def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date
           str(date_from_s) + str(date_to_s) \
           + str(shops_int) + str(request.session['login'])
     # print get_current_job()
-    job = Job.fetch(key, conn)
-    print job
-    print job.return_value
-    if not job.is_finished:
+    print q.fetch(key)
+    print q.fetch(key).return_value
+    if not q.fetch(key).is_finished:
         return HttpResponse('')
     else:
-        cache.set(key, job.return_value)
-        return HttpResponse(job.return_value)
+        cache.set(key, q.fetch(key).return_value)
+        return HttpResponse(q.fetch(key).return_value)
 
 
 def get_base_data_to_html(request, shops='', date_from_first='', date_to_first='', date_from_second='',
