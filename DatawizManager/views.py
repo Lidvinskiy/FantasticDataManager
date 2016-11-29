@@ -94,9 +94,9 @@ def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date
     key = str(request.GET['type'].encode('utf-8')) + str(date_from_f) + str(date_to_f) + \
           str(date_from_s) + str(date_to_s) \
           + str(shops_int) + str(request.session['login'])
-    if request.GET['type'] == 'get_base':
+    if str(request.GET['type'].encode('utf-8')) == 'get_base':
         job = q.fetch_job(request.session['get_base_q_id'])
-    elif request.GET['type'] == 'change_inform':
+    elif str(request.GET['type'].encode('utf-8')) == 'change_inform':
         job = q.fetch_job(request.session['get_change_q_id'])
     if not job.is_finished:
         data = {}
