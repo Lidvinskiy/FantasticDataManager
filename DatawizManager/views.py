@@ -14,7 +14,7 @@ import DatawizManager.forms as forms
 import ast
 import json
 from django.conf import settings
-
+q = Queue(connection=conn)
 
 def Loginpage(request):
     form_class = forms.LoginForm
@@ -90,12 +90,8 @@ def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date
     key = str(request.GET['type'].encode('utf-8')) + str(date_from_f) + str(date_to_f) + \
           str(date_from_s) + str(date_to_s) \
           + str(shops_int) + str(request.session['login'])
-    q = Queue(connection=conn)
-    #print q.fetch_job(key).is_finished
-    #print q.fetch_job(key)
     print get_current_job()
     if not q.fetch_job(key).is_finished:
-        #print q.fetch_job(key).result
         return HttpResponse('')
     else:
         cache.set(key,q.fetch_job(key).result)
@@ -114,7 +110,6 @@ def get_base_data_to_html(request, shops='', date_from_first='', date_to_first='
           str(date_from_s) + str(date_to_s) \
           + str(shops_int) + str(request.session['login'])
     if cache.get(key) is None:
-        q = Queue(connection=conn)
         job = q.enqueue(
             BAL_create_base_inform, QueueBase(request.session['login'], request.session['key'], shops_int, date_from_f,
                                               date_to_f,
@@ -153,7 +148,6 @@ def change_inform(request, shops='', date_from_first='', date_to_first='', date_
           str(date_from_s) + str(date_to_s) \
           + str(shops_int) + str(request.session['login'])
     if cache.get(key) is None:
-        q = Queue(connection=conn)
         q.enqueue(
             BAL_create_change_inform,
             QueueBase(request.session['login'], request.session['key'], shops_int, date_from_f,
