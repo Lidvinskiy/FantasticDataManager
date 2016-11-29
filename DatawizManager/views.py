@@ -96,7 +96,7 @@ def ping_for_queue(request, shops='', date_from_first='', date_to_first='', date
           + str(shops_int) + str(request.session['login'])
     if request.GET['type'] == 'get_base':
         job = q.fetch_job(request.session['get_base_q_id'])
-    else:
+    elif request.GET['type'] == 'change_inform':
         job = q.fetch_job(request.session['get_change_q_id'])
     if not job.is_finished:
         data = {}
@@ -144,7 +144,7 @@ def BAL_create_change_inform(getinform):
 
 # запускає процес отримання інформації про зміну продажу товарів або повертає її з кешу
 def change_inform(request, shops='', date_from_first='', date_to_first='', date_from_second='',
-                  date_to_second=''):
+                  date_to_second='', type=''):
     date_from_f = datetime.datetime.strptime(request.GET['date_from_first'].encode('utf-8'), '%m/%d/%Y').date()
     date_to_f = datetime.datetime.strptime(request.GET['date_to_first'].encode('utf-8'), '%m/%d/%Y').date()
     date_from_s = datetime.datetime.strptime(request.GET['date_from_second'].encode('utf-8'), '%m/%d/%Y').date()
