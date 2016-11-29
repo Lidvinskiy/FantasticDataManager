@@ -36,9 +36,10 @@ class DateInformation(object):
             self.avr_receipt)
 
 
+# конструктор класу створюе таблицю з двох таблиць (про продажі в магазинах за проміжок часу таблицю) та їх порівняння
 class BaseInformation(object):
     def __init__(self, first_day, second_day):
-        if first_day.date_from == first_day.date_to and second_day.date_from==second_day.date_to:
+        if first_day.date_from == first_day.date_to and second_day.date_from == second_day.date_to:
             first_day_date = str(first_day.date_from)
             second_day_date = str(second_day.date_from)
         else:
@@ -57,6 +58,7 @@ class BaseInformation(object):
 
 
 class Creator(object):
+    # повертає інормацію про кліента
     @staticmethod
     def get_user_entity(login, key):
         dw = datawiz.DW(login, key)
@@ -64,6 +66,7 @@ class Creator(object):
         return UserEntity(client_info['name'].encode('utf-8'), client_info['date_from'], client_info['date_to'],
                           pd.DataFrame(client_info['shops'].items(), columns=['ID', 'Name']))
 
+    # повертає інфомацію про продажі в магазинах за проміжок часу таблицю
     @staticmethod
     def get_period_information(login, key, user_shops, date_from, date_to):
         dw = datawiz.DW(login, key)
@@ -85,6 +88,7 @@ class Creator(object):
                                receipt_qty['sum'].sum().round(2),
                                avr_receipt)
 
+    # функція яка створюе дві таблиці про зміну продажу товарів
     @staticmethod
     def get_change_information(login, key,
                                user_shops, date_from_first,
@@ -92,7 +96,7 @@ class Creator(object):
         dw = datawiz.DW(login, key)
         table_grow = pd.DataFrame(columns=('Зміна кількості продаж', 'Зміна обороту'))
         table_fall = pd.DataFrame(columns=('Зміна кількості продаж', 'Зміна обороту'
-                                                                      ''))
+                                                                     ''))
         qty_first = dw.get_products_sale(products=['sum'], by='qty',
                                          shops=user_shops,
                                          date_from=date_from_first,
@@ -139,11 +143,13 @@ class Creator(object):
                 table_fall.sort_values(['Зміна кількості продаж', 'Зміна обороту'], ascending=True)]
 
 
-def create_base_inform(login, key,shops, first_date_from, first_date_to, second_date_from, second_date_to):
+#
+def create_base_inform(login, key, shops, first_date_from, first_date_to, second_date_from, second_date_to):
     return BaseInformation(Creator.get_period_information(login, key, shops, first_date_from, first_date_to),
                            Creator.get_period_information(login, key, shops, second_date_from, second_date_to))
 
 
+#
 def create_change_inform(login, key, user_shops, first_date_from, first_date_to, second_date_from, second_date_to):
     return Creator.get_change_information(login, key, user_shops, first_date_from, first_date_to, second_date_from,
                                           second_date_to)
